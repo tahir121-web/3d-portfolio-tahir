@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0d0d0d;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #804dee, #00cea8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #2a2a2a;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background: #804dee;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-container {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            margin-bottom: 20px;
+            color: #804dee;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .tag-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background: #333;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .tag .remove {
+            cursor: pointer;
+            color: #ff6b6b;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #804dee, #00cea8);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #333;
+        }
+        
+        .projects-container, .reviews-container {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .project-card, .review-card {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .project-header, .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .project-title, .review-title {
+            font-size: 1.5rem;
+            color: #804dee;
+        }
+        
+        .project-actions, .review-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-danger {
+            background: #ff6b6b;
+        }
+        
+        .btn-success {
+            background: #4BB543;
+        }
+        
+        .rating {
+            color: #FFD700;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            background: #4BB543;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #ff6b6b;
+        }
+        
+        .pending {
+            color: #FFA500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio Admin Panel</h1>
+            <p class="subtitle">Manage your projects and reviews</p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="projects">Projects</button>
+            <button class="tab" data-tab="reviews">Reviews</button>
+        </div>
+        
+        <!-- Projects Tab -->
+        <div class="tab-content active" id="projects-tab">
+            <div class="form-container">
+                <h2>Add New Project</h2>
+                <form id="projectForm">
+                    <div class="form-group">
+                        <label for="name">Project Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="image">Image URL</label>
+                        <input type="text" id="image" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sourceCodeLink">Source Code Link</label>
+                        <input type="text" id="sourceCodeLink" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="demoLink">Demo Link (optional)</label>
+                        <input type="text" id="demoLink">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tags</label>
+                        <div class="tag-container" id="tagsContainer">
+                            <!-- Tags will be added here -->
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <input type="text" id="tagName" placeholder="Tag name">
+                            <select id="tagColor">
+                                <option value="blue-text-gradient">Blue</option>
+                                <option value="green-text-gradient">Green</option>
+                                <option value="pink-text-gradient">Pink</option>
+                                <option value="orange-text-gradient">Orange</option>
+                            </select>
+                            <button type="button" class="btn btn-secondary" id="addTag">Add Tag</button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Add Project</button>
+                </form>
+            </div>
+            
+            <div class="projects-container">
+                <h2>Existing Projects</h2>
+                <div id="projectsList">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reviews Tab -->
+        <div class="tab-content" id="reviews-tab">
+            <div class="reviews-container">
+                <h2>Reviews Management</h2>
+                <p>Approve or delete reviews from visitors</p>
+                <div id="reviewsList">
+                    <!-- Reviews will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        // DOM Elements
+        const projectForm = document.getElementById('projectForm');
+        const projectsList = document.getElementById('projectsList');
+        const reviewsList = document.getElementById('reviewsList');
+        const notification = document.getElementById('notification');
+        const tagsContainer = document.getElementById('tagsContainer');
+        const tagNameInput = document.getElementById('tagName');
+        const tagColorSelect = document.getElementById('tagColor');
+        const addTagBtn = document.getElementById('addTag');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // State
+        let tags = [];
+        let projects = [];
+        let reviews = [];
+        
+        // Tab switching
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabName = tab.getAttribute('data-tab');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+                
+                // Load data for the active tab
+                if (tabName === 'projects') {
+                    loadProjects();
+                } else if (tabName === 'reviews') {
+                    loadReviews();
+                }
+            });
+        });
+        
+        // Add tag function
+        addTagBtn.addEventListener('click', () => {
+            const name = tagNameInput.value.trim();
+            const color = tagColorSelect.value;
+            
+            if (name) {
+                tags.push({ name, color });
+                renderTags();
+                tagNameInput.value = '';
+            }
+        });
+        
+        // Render tags
+        function renderTags() {
+            tagsContainer.innerHTML = '';
+            tags.forEach((tag, index) => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag';
+                tagElement.innerHTML = `
+                    <span class="${tag.color}">${tag.name}</span>
+                    <span class="remove" data-index="${index}">×</span>
+                `;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.tag .remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.getAttribute('data-index'));
+                    tags.splice(index, 1);
+                    renderTags();
+                });
+            });
+        }
+        
+        // Show notification
+        function showNotification(message, isError = false) {
+            notification.textContent = message;
+            notification.className = 'notification ' + (isError ? 'error' : '');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Load projects
+        async function loadProjects() {
+            try {
+                const response = await fetch('/api/projects');
+                projects = await response.json();
+                renderProjects();
+            } catch (error) {
+                showNotification('Failed to load projects', true);
+            }
+        }
+        
+        // Load reviews
+        async function loadReviews() {
+            try {
+                const response = await fetch('/api/reviews/all');
+                reviews = await response.json();
+                renderReviews();
+            } catch (error) {
+                showNotification('Failed to load reviews', true);
+            }
+        }
+        
+        // Render projects
+        function renderProjects() {
+            projectsList.innerHTML = '';
+            
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<p>No projects found. Add your first project!</p>';
+                return;
+            }
+            
+            projects.forEach(project => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'project-card';
+                projectElement.innerHTML = `
+                    <div class="project-header">
+                        <h3 class="project-title">${project.name}</h3>
+                        <div class="project-actions">
+                            <button class="btn btn-sm btn-danger" data-id="${project._id}">Delete</button>
+                        </div>
+                    </div>
+                    <p>${project.description}</p>
+                    <div style="margin-top: 15px;">
+                        ${project.tags.map(tag => `<span class="${tag.color}">#${tag.name}</span>`).join(' ')}
+                    </div>
+                `;
+                projectsList.appendChild(projectElement);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.project-actions .btn-danger').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    if (confirm('Are you sure you want to delete this project?')) {
+                        try {
+                            await fetch(`/api/projects/${id}`, {
+                                method: 'DELETE'
+                            });
+                            showNotification('Project deleted successfully');
+                            loadProjects();
+                        } catch (error) {
+                            showNotification('Failed to delete project', true);
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Render reviews
+        function renderReviews() {
+            reviewsList.innerHTML = '';
+            
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = '<p>No reviews found.</p>';
+                return;
+            }
+            
+            reviews.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review-card';
+                reviewElement.innerHTML = `
+                    <div class="review-header">
+                        <h3 class="review-title">${review.name} ${review.approved ? '' : '<span class="pending">(Pending Approval)</span>'}</h3>
+                        <div class="review-actions">
+                            ${!review.approved ? 
+                                `<button class="btn btn-sm btn-success approve-btn" data-id="${review._id}">Approve</button>` : 
+                                ''}
+                            <button class="btn btn-sm btn-danger delete-btn" data-id="${review._id}">Delete</button>
+                        </div>
+                    </div>
+                    <p><strong>Company:</strong> ${review.company} | <strong>Position:</strong> ${review.position}</p>
+                    <p><strong>Rating:</strong> <span class="rating">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</span> (${review.rating}/5)</p>
+                    <p><strong>Review:</strong> ${review.review}</p>
+                    <p><small>Submitted: ${new Date(review.createdAt).toLocaleDateString()}</small></p>
+                `;
+                reviewsList.appendChild(reviewElement);
+            });
+            
+            // Add event listeners to approve buttons
+            document.querySelectorAll('.approve-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    try {
+                        await fetch(`/api/reviews/${id}/approve`, {
+                            method: 'PUT'
+                        });
+                        showNotification('Review approved successfully');
+                        loadReviews();
+                    } catch (error) {
+                        showNotification('Failed to approve review', true);
+                    }
+                });
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    if (confirm('Are you sure you want to delete this review?')) {
+                        try {
+                            await fetch(`/api/reviews/${id}`, {
+                                method: 'DELETE'
+                            });
+                            showNotification('Review deleted successfully');
+                            loadReviews();
+                        } catch (error) {
+                            showNotification('Failed to delete review', true);
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Handle project form submission
+        projectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const projectData = {
+                name: document.getElementById('name').value,
+                description: document.getElementById('description').value,
+                image: document.getElementById('image').value,
+                sourceCodeLink: document.getElementById('sourceCodeLink').value,
+                demoLink: document.getElementById('demoLink').value,
+                tags: tags
+            };
+            
+            try {
+                const response = await fetch('/api/projects', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(projectData)
+                });
+                
+                if (response.ok) {
+                    showNotification('Project added successfully');
+                    projectForm.reset();
+                    tags = [];
+                    renderTags();
+                    loadProjects();
+                } else {
+                    throw new Error('Failed to add project');
+                }
+            } catch (error) {
+                showNotification('Failed to add project', true);
+            }
+        });
+        
+        // Initialize
+        loadProjects();
+    </script>
+</body>
+</html>
