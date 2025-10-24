@@ -4,6 +4,7 @@ import compression from "vite-plugin-compression";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/', // Fixed for Vercel deployment
   plugins: [
     react(),
     compression({
