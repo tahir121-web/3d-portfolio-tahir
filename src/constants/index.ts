@@ -195,24 +195,24 @@ const testimonials: TTestimonial[] = [
 
 const projects: TProject[] = [
   {
-    name: "Medical AI Chatbot Platform",
+    name: "3D Developer Portfolio",
     description:
-      "An AI chatbot platform that automates triage and user onboarding, saving hundreds of staff hours.",
+      "A showcase of innovation and technical skill with immersive 3D experiences using Three.js.",
     tags: [
       {
-        name: "nodejs",
+        name: "threejs",
         color: "blue-text-gradient",
       },
       {
-        name: "mongodb",
+        name: "react",
         color: "green-text-gradient",
       },
       {
-        name: "ai",
+        name: "typescript",
         color: "pink-text-gradient",
       },
     ],
-    image: ai, // Changed to AI image
+    image: portfolio, // This is now first
     sourceCodeLink: "https://github.com/tahir121-web",
   },
   {
@@ -233,28 +233,28 @@ const projects: TProject[] = [
         color: "pink-text-gradient",
       },
     ],
-    image: laptop, // Changed to laptop image
+    image: laptop,
     sourceCodeLink: "https://github.com/tahir121-web",
   },
   {
-    name: "3D Developer Portfolio",
+    name: "Medical AI Chatbot Platform",
     description:
-      "A showcase of innovation and technical skill with immersive 3D experiences using Three.js.",
+      "An AI chatbot platform that automates triage and user onboarding, saving hundreds of staff hours.",
     tags: [
       {
-        name: "threejs",
+        name: "nodejs",
         color: "blue-text-gradient",
       },
       {
-        name: "react",
+        name: "mongodb",
         color: "green-text-gradient",
       },
       {
-        name: "typescript",
+        name: "ai",
         color: "pink-text-gradient",
       },
     ],
-    image: portfolio, // Changed to portfolio
+    image: ai, // This is now third
     sourceCodeLink: "https://github.com/tahir121-web",
   },
 ];
