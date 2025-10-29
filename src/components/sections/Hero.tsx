@@ -16,6 +16,7 @@ const Hero = () => {
         </div>
 
         <div>
+          <img src="/html6_1.jpg" alt="Profile" className="w-32 h-32 rounded-full mb-4 object-cover" />
           <h1 className={`${styles.heroHeadText} text-white`}>
             Hi, I'm <span className="text-[#915EFF]">{config.hero.name}</span>
             <span className="inline-flex items-center justify-center ml-2 bg-blue-500 text-white rounded-full w-5 h-5 text-xs font-bold">✓</span>
