@@ -63,41 +63,7 @@ export const config: TConfig = {
     about: {
       p: "Introduction",
       h2: "Overview.",
-      content: `I help startups and small businesses unlock the power of intelligent web applications and automation. As a top-rated Freelance MERN Stack & AI Chatbot Developer, I deliver projects that drive growth, efficiency, and outstanding user experiences—with proven results across multiple industries.
-
-What I Offer:
-
-⚡️ Full-Stack Web Development: Scalable MERN stack solutions for business platforms, portals, and SaaS products.
-
-🤖 AI-Powered Chatbots & Automation: Custom chatbots (GPT, NLP) to automate support, lead generation, and customer engagement.
-
-🎨 3D & Interactive Interfaces: Modern, immersive UI with Three.js, React Three Fiber, and tailored animations.
-
-🔗 API Design & Integration: Secure, robust REST APIs connecting your apps to scalable cloud infrastructure.
-
-☁️ Cloud Deployment & DevOps: Fast, reliable deployment using Vercel, Render, Docker—and ongoing optimization.
-
-Why Clients Choose Me:
-
-Delivered 20+ successful remote projects for startups & SMEs—4.9/5 star rating on Upwork
-
-Fast and open client communication (always available for calls and updates)
-
-Hands-on experience with real business needs: from MVPs to full-scale systems
-
-Committed to deadlines, quality, and exceeding expectations
-
-Strong portfolio: https://github.com/tahir121-web
-
-Recent Success Stories:
-
-Built a medical AI chatbot platform that automates triage and user onboarding, saving hundreds of staff hours
-
-Developed a laptop marketplace with advanced authentication, payment workflow, and seamless UX
-
-Crafted a 3D developer portfolio that showcases innovation and technical skill
-
-Let's work together to transform your ideas into intelligent digital solutions. Message me your project needs for a free consult!`,
+      content: `I'm a dedicated MERN Stack & AI Chatbot Developer with hands-on experience building intelligent web applications, custom automation, and immersive 3D user interfaces. I specialize in React, Node.js, MongoDB, Three.js, and full-stack development—leading expert teams to deliver fast, scalable, and user-friendly solutions for startups and businesses. I thrive on solving real-world challenges and collaborate openly with clients to turn ideas into impactful digital products. Let's connect and bring your next project to life!`,
     },
     experience: {
       p: "What I have done so far",
