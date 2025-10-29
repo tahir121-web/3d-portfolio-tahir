@@ -6,6 +6,9 @@ import web from "./web.png";
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
+import portfolio from "./portfolio.jpg";
+import ai from "./ai.jpg"; // Added AI image import
+import laptop from "./laptop.jpg"; // Added laptop image import
 
 import css from "./tech/css.png";
 import docker from "./tech/docker.png";
@@ -39,6 +42,9 @@ export {
   github,
   menu,
   close,
+  portfolio,
+  ai, // Added AI image export
+  laptop, // Added laptop image export
   css,
   docker,
   figma,

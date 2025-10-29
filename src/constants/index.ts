@@ -28,6 +28,9 @@ import {
   jobit,
   tripguide,
   threejs,
+  portfolio, // Added portfolio import
+  ai, // Added AI image import
+  laptop, // Added laptop image import
 } from "../assets";
 
 export const navLinks: TNavLink[] = [
@@ -209,7 +212,7 @@ const projects: TProject[] = [
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
+    image: ai, // Changed to AI image
     sourceCodeLink: "https://github.com/tahir121-web",
   },
   {
@@ -230,7 +233,7 @@ const projects: TProject[] = [
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
+    image: laptop, // Changed to laptop image
     sourceCodeLink: "https://github.com/tahir121-web",
   },
   {
@@ -251,7 +254,7 @@ const projects: TProject[] = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
+    image: portfolio, // Changed to portfolio
     sourceCodeLink: "https://github.com/tahir121-web",
   },
 ];
