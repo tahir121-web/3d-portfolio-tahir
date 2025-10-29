@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-
+// Removed unused motion import
 import { styles } from "../../constants/styles";
 import { ComputersCanvas } from "../canvas";
 import { config } from "../../constants/config";

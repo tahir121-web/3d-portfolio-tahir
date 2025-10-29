@@ -24,13 +24,10 @@ import {
   starbucks,
   tesla,
   shopify,
-  carrent,
-  jobit,
-  tripguide,
   threejs,
-  portfolio, // Added portfolio import
-  ai, // Added AI image import
-  laptop, // Added laptop image import
+  portfolio,
+  ai,
+  laptop,
 } from "../assets";
 
 export const navLinks: TNavLink[] = [
