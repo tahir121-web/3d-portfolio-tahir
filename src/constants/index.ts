@@ -256,4 +256,6 @@ const projects: TProject[] = [
   },
 ];
 
+// Trigger deployment update
+
 export { services, technologies, experiences, testimonials, projects };
