@@ -1,4 +1,4 @@
-import logo from "./logo.png";
+import logo from "./logo.jpg"; // Changed back to logo.jpg since lgo.png doesn't exist
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";

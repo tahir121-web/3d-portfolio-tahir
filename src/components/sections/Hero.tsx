@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { styles } from "../../constants/styles";
 import { ComputersCanvas } from "../canvas";
 import { config } from "../../constants/config";
+// Removed unused logo import
 
 const Hero = () => {
   return (
@@ -16,6 +17,7 @@ const Hero = () => {
         </div>
 
         <div>
+          {/* Removed image completely */}
           <h1 className={`${styles.heroHeadText} text-white`}>
             Hi, I'm <span className="text-[#915EFF]">{config.hero.name}</span>
             <span className="inline-flex items-center justify-center ml-2 bg-blue-500 text-white rounded-full w-5 h-5 text-xs font-bold">✓</span>
@@ -31,7 +33,7 @@ const Hero = () => {
 
       <div className="xs:bottom-10 absolute bottom-32 flex w-full items-center justify-center">
         <a href="#about">
-          <div className="border-secondary flex h-[64px] w-[35px] items-start justify-center rounded-3xl border-4 p-2">
+          <div className="border-secondary flex h-[64px] w-[35px] items-start justify-center rounded-3jl border-4 p-2">
             <motion.div
               animate={{
                 y: [0, 24, 0],
