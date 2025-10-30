@@ -21,9 +21,6 @@ import {
   git,
   figma,
   docker,
-  starbucks,
-  tesla,
-  shopify,
   threejs,
   portfolio,
   ai,
@@ -111,7 +108,7 @@ const experiences: TExperience[] = [
   {
     title: "Freelance MERN Stack & AI Chatbot Developer",
     companyName: "Available for Remote Projects",
-    icon: starbucks,
+    icon: web,
     iconBg: "#383E56",
     date: "Current",
     points: [
@@ -125,7 +122,7 @@ const experiences: TExperience[] = [
   {
     title: "Full Stack Developer and Chatbot Integrator",
     companyName: "Upwork",
-    icon: starbucks,
+    icon: reactjs,
     iconBg: "#383E56",
     date: "Oct 2025 - Present",
     points: [
@@ -138,7 +135,7 @@ const experiences: TExperience[] = [
   {
     title: "MERN Stack Developer Intern",
     companyName: "U Devs",
-    icon: tesla,
+    icon: mongodb,
     iconBg: "#E6DEDD",
     date: "Sep 2025 - Present",
     points: [
@@ -151,7 +148,7 @@ const experiences: TExperience[] = [
   {
     title: "Back End Developer Intern",
     companyName: "CodeAlpha",
-    icon: shopify,
+    icon: nodejs,
     iconBg: "#383E56",
     date: "Sep 2025 - Present",
     points: [
