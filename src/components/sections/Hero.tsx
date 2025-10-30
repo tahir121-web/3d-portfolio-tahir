@@ -26,7 +26,11 @@ const Hero = () => {
         </div>
       </div>
 
-      <ComputersCanvas />
+      <div className="absolute inset-0 top-0 bottom-0 left-0 right-0 flex items-center justify-center">
+        <div className="w-full h-full max-w-6xl">
+          <ComputersCanvas />
+        </div>
+      </div>
 
       {/* Removed the animated scroll indicator button */}
     </section>

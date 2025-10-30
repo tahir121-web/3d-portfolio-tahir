@@ -75,7 +75,7 @@ const ComputersCanvas = () => {
   }, []);
 
   return (
-    <>
+    <div className="w-full h-full">
       {isMobile ? (
         <div className="flex items-center justify-center h-full w-full">
           <div className="w-40 h-40 sm:w-48 sm:h-48 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
@@ -108,7 +108,7 @@ const ComputersCanvas = () => {
           <Preload all />
         </Canvas>
       )}
-    </>
+    </div>
   );
 };
 
