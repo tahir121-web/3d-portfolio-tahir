@@ -1,8 +1,6 @@
-// Removed unused motion import
 import { styles } from "../../constants/styles";
 import { ComputersCanvas } from "../canvas";
 import { config } from "../../constants/config";
-// Removed unused logo import
 
 const Hero = () => {
   return (
