@@ -19,22 +19,33 @@ const emailjsConfig = {
 };
 
 const Contact = () => {
-  const formRef = useRef<React.LegacyRef<HTMLFormElement> | undefined>();
+  const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState(INITIAL_STATE);
   const [loading, setLoading] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<{ success: boolean; message: string } | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (e === undefined) return;
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement> | undefined) => {
-    if (e === undefined) return;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Check if EmailJS is properly configured
+    if (!emailjsConfig.serviceId || !emailjsConfig.templateId || !emailjsConfig.accessToken) {
+      setEmailStatus({
+        success: false,
+        message: "Email service not configured. Please contact the site administrator."
+      });
+      console.error("EmailJS not configured. Check your .env file.");
+      return;
+    }
+    
     setLoading(true);
+    setEmailStatus(null);
 
     emailjs
       .send(
@@ -52,15 +63,19 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
-
+          setEmailStatus({
+            success: true,
+            message: "Thank you! Your message has been sent successfully."
+          });
           setForm(INITIAL_STATE);
         },
         (error) => {
           setLoading(false);
-
-          console.log(error);
-          alert("Something went wrong.");
+          setEmailStatus({
+            success: false,
+            message: "Something went wrong while sending your message. Please try again later."
+          });
+          console.error("EmailJS error:", error);
         }
       );
   };
@@ -76,7 +91,6 @@ const Contact = () => {
         <Header useMotion={false} {...config.contact} showVerificationBadge={true} />
 
         <form
-          // @ts-expect-error
           ref={formRef}
           onSubmit={handleSubmit}
           className="mt-12 flex flex-col gap-8"
@@ -97,13 +111,22 @@ const Contact = () => {
                   placeholder={placeholder}
                   className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
                   {...(input === "message" && { rows: 7 })}
+                  required
                 />
               </label>
             );
           })}
+          
+          {emailStatus && (
+            <div className={`p-4 rounded-lg ${emailStatus.success ? 'bg-green-900 text-green-200' : 'bg-red-900 text-red-200'}`}>
+              {emailStatus.message}
+            </div>
+          )}
+          
           <button
             type="submit"
             className="bg-tertiary shadow-primary w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
+            disabled={loading}
           >
             {loading ? "Sending..." : "Send"}
           </button>
