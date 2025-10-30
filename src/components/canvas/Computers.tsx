@@ -56,7 +56,11 @@ const ComputersCanvas = () => {
   return (
     <>
       {isMobile ? (
-        <></>
+        <div className="flex items-center justify-center h-full">
+          <div className="w-48 h-48 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-4xl font-bold">3D</span>
+          </div>
+        </div>
       ) : (
         <Canvas
           frameloop="demand"
