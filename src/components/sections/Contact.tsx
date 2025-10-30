@@ -71,11 +71,20 @@ const Contact = () => {
         },
         (error) => {
           setLoading(false);
+          console.error("EmailJS error:", error);
+          
+          // Provide more specific error messages
+          let errorMessage = "Something went wrong while sending your message. Please try again later.";
+          if (error.text) {
+            errorMessage = `Error: ${error.text}`;
+          } else if (error.status) {
+            errorMessage = `Error ${error.status}: ${error.text || 'Failed to send message'}`;
+          }
+          
           setEmailStatus({
             success: false,
-            message: "Something went wrong while sending your message. Please try again later."
+            message: errorMessage
           });
-          console.error("EmailJS error:", error);
         }
       );
   };

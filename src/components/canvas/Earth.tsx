@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -13,7 +13,28 @@ const Earth = () => {
 };
 
 const EarthCanvas = () => {
-  return (
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if device is mobile
+    const isMobileDevice = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && 
+                          /Mobile/.test(navigator.userAgent);
+    
+    // Only disable on very low-performance mobile devices
+    setIsMobile(isMobileDevice && window.innerWidth <= 480);
+  }, []);
+
+  return isMobile ? (
+    <div className="flex items-center justify-center h-full w-full">
+      <div className="w-40 h-40 sm:w-48 sm:h-48 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+        <div className="text-center">
+          <span className="text-white text-2xl sm:text-4xl font-bold">🌎</span>
+          <p className="text-white text-xs sm:text-sm mt-2 px-2">3D Earth Model</p>
+          <p className="text-white text-xs mt-1 px-2">Not supported on this device</p>
+        </div>
+      </div>
+    </div>
+  ) : (
     <Canvas
       shadows
       frameloop="demand"

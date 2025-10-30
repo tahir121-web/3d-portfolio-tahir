@@ -43,12 +43,14 @@ const ComputersCanvas = () => {
       height: window.innerHeight,
     });
 
-    // Set mobile state based on more comprehensive criteria
-    const isSmallScreen = window.innerWidth <= 768;
-    const isLowPerformance = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+    // More permissive mobile detection
     // Only show placeholder for very small screens or explicitly low-performance devices
-    setIsMobile(isSmallScreen && (window.innerWidth <= 480 || isLowPerformance));
+    const isVerySmallScreen = window.innerWidth <= 480 && window.innerHeight <= 700;
+    const isLowPerformance = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && 
+                            /Mobile/.test(navigator.userAgent);
+    
+    // Show 3D model for most devices, only placeholder for very constrained devices
+    setIsMobile(isVerySmallScreen && isLowPerformance);
 
     // Add a listener for changes to the screen size
     const handleResize = () => {
@@ -58,11 +60,12 @@ const ComputersCanvas = () => {
       });
       
       // Update mobile state based on new screen size
-      const isSmallScreen = window.innerWidth <= 768;
-      const isLowPerformance = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isVerySmallScreen = window.innerWidth <= 480 && window.innerHeight <= 700;
+      const isLowPerformance = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && 
+                              /Mobile/.test(navigator.userAgent);
       
-      // Only show placeholder for very small screens or explicitly low-performance devices
-      setIsMobile(isSmallScreen && (window.innerWidth <= 480 || isLowPerformance));
+      // Show 3D model for most devices, only placeholder for very constrained devices
+      setIsMobile(isVerySmallScreen && isLowPerformance);
     };
 
     // Add the event listener
@@ -80,8 +83,9 @@ const ComputersCanvas = () => {
         <div className="flex items-center justify-center h-full w-full">
           <div className="w-40 h-40 sm:w-48 sm:h-48 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
             <div className="text-center">
-              <span className="text-white text-2xl sm:text-4xl font-bold">3D</span>
-              <p className="text-white text-xs sm:text-sm mt-1 px-2">Model Loading...</p>
+              <span className="text-white text-2xl sm:text-4xl font-bold">💻</span>
+              <p className="text-white text-xs sm:text-sm mt-2 px-2">3D Laptop Model</p>
+              <p className="text-white text-xs mt-1 px-2">Not supported on this device</p>
             </div>
           </div>
         </div>
